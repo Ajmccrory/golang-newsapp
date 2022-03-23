@@ -9,15 +9,16 @@ html {
 }
 
 :root {
-  --lightred: #ff6347;
-  --carminepink: #eb4c42;
-  --darkgrey: #777;
-  --lightgrey: #dadce0;
-  --lightblue: #add8e6;
+  --light-blue: #3d5954;
+  --light-navy: #637a76;
+  --dark-grey: #777;
+  --light-grey: #dadce0;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  
+ 
 }
 
 a {
@@ -25,20 +26,23 @@ a {
   color: #333;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 a.button {
-  border: 2px solid #ff6347;
-  color: var(--lightred);
+  border: 2px solid #b1bcba;
+  color: var(--light-grey);
   border-radius: 4px;
   padding: 6px 24px;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: bold;
 }
 
 a.button:hover {
   text-decoration: none;
-  background-color: var(--carminepink);
-  color: var(--lightred);
-
+  background-color: var(--light-navy);
+  color: var(--light-blue);
 }
 
 header {
@@ -49,30 +53,32 @@ header {
   left: 0;
   right: 0;
   display: flex;
-  justify-content: speace-between;
-  background-color: var(--lightblue);
+  justify-content: space-between;
+  background-color: var(--light-blue);
   padding: 5px 10px;
   align-items: center;
 }
 
 .logo {
-  color: var(--lightred);
+  font-weight: bold;
+  color: var(--light-grey);
 }
 
 form {
   height: calc(100% - 10px);
 }
 
+
 .search-input {
   width: 500px;
   height: 100%;
   border-radius: 4px;
   border-color: transparent;
-  background-color: var(--lightred);
-  color: var(--lightblue);
+  background-color: var(--light-navy);
+  color: var(--light-grey);
   font-size: 16px;
   line-height: 1.4;
-  padding-left: 5px
+  padding-left: 5px;
 }
 
 .container {
@@ -83,7 +89,7 @@ form {
 }
 
 .result-count {
-  color: var(--lightred);
+  color: var(--dark-grey);
   text-align: center;
   margin-bottom: 15px;
 }
@@ -96,7 +102,7 @@ form {
   display: flex;
   align-items: flex-start;
   margin-bottom: 30px;
-  border: 1px solid var(--lightgrey);
+  border: 1px solid var(--light-grey);
   padding: 15px;
   border-radius: 4px;
   justify-content: space-between;
@@ -114,13 +120,13 @@ form {
 }
 
 .description {
-  color: var(--darkgrey);
+  color: var(--dark-grey);
   margin-bottom: 15px;
 }
 
 .metadata {
   display: flex;
-  color: var(--lightblue);
+  color: var(--light-navy);
   font-size: 14px;
 }
 
@@ -133,7 +139,7 @@ form {
   margin-top: 20px;
 }
 
-.previous-page{
+.previous-page {
   margin-right: 20px;
 }
 
@@ -142,32 +148,31 @@ form {
     flex-direction: column;
     height: auto;
     padding-bottom: 10px;
-}
+  }
 
-.logo {
-  display: inline-block;
-  margin-bottom: 10px;
-}
+  .logo {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
 
-form, .search-input {
-  width: 100%;
-}
+  form, .search-input {
+    width: 100%;
+  }
 
-.github-button {
-  display: none;
-}
+  .github-button {
+    display: none;
+  }
 
-.title {
-  font-size: 18px;
-}
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
 
-.description {
-  font-size: 14px;
-}
+  .description {
+    font-size: 14px;
+  }
 
-.article-image {
-  display: none;
-  
+  .article-image {
+    display: none;
   }
 }
-
