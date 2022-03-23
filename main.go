@@ -13,18 +13,23 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/freshman-tech/news-demo/news"
+	/*need this for specific api linking
+	 stuff i didn't feel like figuring out*/
 
 )
+
+//reading html template for search implementation
 var (
-	//using poop for tmpl lol
-	poop = template.Must(template.ParseFiles("index.html"))
+	tmpl = template.Must(template.ParseFiles("index.html"))
 )
+
 type Search struct {
 	Query      string
 	NextPage   int
 	TotalPages int
 	Results    *news.Results
 }
+
 
 func(s *Search) IsLastPage() bool {
 	return s.NextPage >= s.TotalPages
@@ -41,10 +46,10 @@ func(s *Search) CurrentPage() int {
 func (s *Search) PreviousPage() int {
 	return s.CurrentPage() - 1
 }
-
+//handler for http connection
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	buf := &bytes.Buffer{}
-	err := poop.Execute(buf, nil)
+	err := tmpl.Execute(buf, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -53,6 +58,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	buf.WriteTo(w)
 }
 
+//obviously search handler
 func searchHandler(newsapi *news.Client) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		u, err := url.Parse(r.URL.String())
@@ -67,7 +73,7 @@ func searchHandler(newsapi *news.Client) http.HandlerFunc {
 		if page == "" {
 			page = "1"
 		}
-
+//newsapi is on newsapi.org
 		results, err := newsapi.FetchEverything(searchQuery, page)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -92,7 +98,7 @@ func searchHandler(newsapi *news.Client) http.HandlerFunc {
 		}
 
 		buf := &bytes.Buffer{}
-		err = poop.Execute(buf, search)
+		err = tmpl.Execute(buf, search)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -112,7 +118,7 @@ func main() {
 	if port == "" {
 		port = "8010"
 	}
-
+//key is in the .env
 	apiKey := os.Getenv("NEWS_API_KEY")
 	if apiKey == "" {
 		log.Fatal("Env: apiKey must be set")
@@ -122,7 +128,8 @@ func main() {
 	newsapi := news.NewClient(myClient, apiKey, 20)
 
 	fs := http.FileServer(http.Dir("assets"))
-
+/*forgot i linked these to assets folder and 
+forgot to make one, created so many issues*/
 mux := http.NewServeMux()
 mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 mux.HandleFunc("/search/", searchHandler(newsapi))
