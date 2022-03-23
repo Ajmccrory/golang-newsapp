@@ -14,4 +14,4 @@ RUN mkdir -p $APP_HOME && chown -R $APP_USER:$APP_USER $APP_HOME
 USER $APP_USER
 WORKDIR $APP_HOME
 EXPOSE 8010
-CMD ["bee", "run"]
+CMD "run"
