@@ -1,5 +1,5 @@
 package news
-
+//links to main.go through github
 import (
 	"encoding/json"
 	"fmt"
