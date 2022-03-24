@@ -13,12 +13,10 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/freshman-tech/news-demo/news"
-	/*need this for specific api linking
-	 stuff i didn't feel like figuring out*/
+	/*their news package works, mine doesn't*/
 
 )
 
-//reading html template for search implementation
 var (
 	tmpl = template.Must(template.ParseFiles("index.html"))
 )
