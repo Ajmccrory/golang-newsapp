@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"bytes"
 	"html/template"
 	"log"
@@ -11,12 +12,14 @@ import (
 	"strconv"
 	"time"
 
+
+	"github.com/Ajmccrory/gonewsapp/tree/main/pkg/websocket"
+	"github.com/Ajmccrory/gonewsapp/tree/main/news"
 	"github.com/joho/godotenv"
-	"github.com/freshman-tech/news-demo/news"
-	/*their news package works, mine doesn't*/
 
 )
 
+//reading html template for search implementation
 var (
 	tmpl = template.Must(template.ParseFiles("index.html"))
 )
@@ -54,6 +57,18 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	buf.WriteTo(w)
+}
+func serveWs(w http.ResponseWriter, r *http.Request) {
+	ws, err := websocket.Upgrade(w, r)
+	if err != nil {
+		fmt.Fprintf(w, "%+V\n", err)
+	}
+	go websocket.Writer(ws)
+	websocket.Reader(ws)
+}
+
+func setupRoutes() {
+	http.HandleFunc("/ws", serveWs)
 }
 
 //obviously search handler
@@ -128,6 +143,8 @@ func main() {
 	fs := http.FileServer(http.Dir("assets"))
 /*forgot i linked these to assets folder and 
 forgot to make one, created so many issues*/
+setupRoutes()
+
 mux := http.NewServeMux()
 mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 mux.HandleFunc("/search/", searchHandler(newsapi))
