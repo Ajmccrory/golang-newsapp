@@ -13,8 +13,8 @@ import (
 	"time"
 
 
-	"github.com/Ajmccrory/gonewsapp/tree/main/pkg/websocket"
-	"github.com/Ajmccrory/gonewsapp/tree/main/news"
+	"github.com/Ajmccrory/gonewsapp/pkg/websocket"
+	"github.com/Ajmccrory/gonewsapp/news"
 	"github.com/joho/godotenv"
 
 )
