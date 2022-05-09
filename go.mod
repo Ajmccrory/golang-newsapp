@@ -1,4 +1,4 @@
-module github.com/Ajmccrory/gonewsapp/tree/main
+module github.com/Ajmccrory/gonewsapp
 
 go 1.17
 
